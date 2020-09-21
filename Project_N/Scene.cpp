@@ -35,7 +35,7 @@ Scene_One::Scene_One() :
 	aTwo("A2", sf::Vector2f(100,200)),
 	twoB("2B", sf::Vector2f(100, 400))
 {
-	
+
 }
 
 void Scene_One::update()

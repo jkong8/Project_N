@@ -69,30 +69,24 @@ Menu_State::Menu_State(Game_State** current_State, Game_State* next_State)
 		Menu_State::rain[i].shape.setFillColor(sf::Color::White);
 	}
 
-	//Load Audio
-	if (Menu_State::main_Music_.openFromFile("./Sounds/city_of_ruin2.wav"))
-	{
-		std::cout << "Load Music File Success!\n";
-		Menu_State::main_Music_.setLoop(true);
-	}
-	Menu_State::loadSound(Menu_State::ui_Confirmation_, Menu_State::ui_ConfirmationSB_, "./Sounds/ui_confirmation.wav");
-	Menu_State::ui_Hover_.setVolume(75);
-	Menu_State::loadSound(Menu_State::ui_Hover_, Menu_State::ui_HoverSB_, "./Sounds/ui_hover.wav");
-	//Play Music on construction
-	Menu_State::main_Music_.play();
+	//<!> Delete Later
+	std::cout << "Audio from Main:" << &a_instance_ << "\n";
+
 }
 
 Game_State* Menu_State::enter()
 {
+	std::cout << "Playing Music\n";
+	a_instance_.main_music_.play();
 	return this;
 }
 
 void Menu_State::exit()
 {
 	//Stop Audio
-	Menu_State::main_Music_.stop();
+	a_instance_.main_music_.stop();
 	//Play Confirmation Audio
-	Menu_State::ui_Confirmation_.play();
+	a_instance_.ui_confirmation_.play();
 	//Change State
 	*ptr_to_ptr_to_current_State_ = next_State_->enter();
 }
@@ -158,13 +152,4 @@ void Menu_State::render(sf::RenderWindow& window, std::vector<Entity*>& eVector)
 		window.draw(rain[i].shape);
 	}
 
-}
-
-void Menu_State::loadSound(sf::Sound& sound, sf::SoundBuffer& buffer, std::string filepath)
-{
-	if (buffer.loadFromFile(filepath))
-	{
-		std::cout << "Load Sound File Success!\n";
-		sound.setBuffer(buffer);
-	}
 }

@@ -16,7 +16,7 @@ Game::Game() :
 	Game::window_.create(sf::VideoMode(WIDTH, HEIGHT), "Project N");	
 	Game::window_.setFramerateLimit(60);
 	//<!> Set the game state - NOT STATIC
-	Game::current_State_ = &menu_State;
+	Game::current_State_ = menu_State.enter();
 	//<!> DELETE LATER Adding a Entity to the vector to test
 	eVector.push_back(new TwoB());
 }
@@ -59,5 +59,7 @@ bool Game::isOn()
 {
 	return Game::on_;
 }
+
+//WILL THIS BE PUSHED TO MY GIT HUB?
 
 

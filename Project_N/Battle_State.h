@@ -1,6 +1,7 @@
 #pragma once
 #include "Entity.h"
 #include "Game_State.h"
+#include "Audio_Manager.h"
 
 class Battle_State : public Game_State
 {
@@ -112,7 +113,7 @@ private:
 	void checkVictory();
 	void checkDefeat();
 	//Audio
-	sf::Music battle_music_;
+	Audio_Manager& a_instance_ = Audio_Manager::getInstance();
 	//Pointer to current_State pointer in Game Class
 	Game_State** ptr_to_ptr_to_current_State_;
 	//Pointer to the test_State object in the Game Class

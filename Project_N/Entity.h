@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "Animation.h"
 #include "Animation_Controller.h"
+#include "Audio_Manager.h"
 #define MAX_ATP 1000
 //Base Entity Class
 class Entity
@@ -30,6 +31,7 @@ public:
 	void setMaxHP(float);
 	virtual bool isDead();
 	bool atpFull();
+	Audio_Manager& a_instance = Audio_Manager::getInstance();
 private:
 	float x_, y_;
 	sf::RectangleShape rectangle_;

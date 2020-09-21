@@ -6,6 +6,7 @@
 #define UI_POS_Y2 710
 
 bool Battle_State::slow_time = false;
+//Constructor
 Battle_State::Battle_State(Game_State** current_State, Game_State* next_State)
 {
 	//Assign pointers for state transition
@@ -20,11 +21,8 @@ Battle_State::Battle_State(Game_State** current_State, Game_State* next_State)
 	select_offset_.x = 40;
 	select_offset_.y = -50;
 
-	//Load music
-	battle_music_.openFromFile("./Sounds/birth_of_a_wish.wav");
-
-	//Battle UI Stuff <!> On entering battle state, find way to change size of party and enemies
-	//battle_ui.create(MAX_PARTY, MAX_ENEMIES); //<-- Change Later
+	//<!> Delete Later
+	std::cout << "Audio from Battle:" << &a_instance_ << "\n";
 }
 
 Game_State* Battle_State::enter()
@@ -32,8 +30,8 @@ Game_State* Battle_State::enter()
 	initializeParty();
 	initializeEnemies();
 	battle_ui.create(party_array, party_size_, enemy_size_);
-	//battle_music_.play();
-	battle_music_.setLoop(true);
+	a_instance_.battle_music_.play();
+	a_instance_.battle_music_.setLoop(true);
 	return this;
 }
 
@@ -50,9 +48,8 @@ void Battle_State::exit()
 	{
 		delete enemy_array[i];
 	}
-
-	//Stop music
-	battle_music_.stop();
+	//Stops audio
+	a_instance_.battle_music_.stop();
 	//Change State
 	*ptr_to_ptr_to_current_State_ = next_State_->enter();
 }

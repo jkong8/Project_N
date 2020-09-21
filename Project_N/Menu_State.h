@@ -1,6 +1,6 @@
 #pragma once
 #include "Game_State.h"
-
+#include "Audio_Manager.h"
 class Menu_State : public Game_State
 {
 public:
@@ -36,14 +36,6 @@ private:
 	sf::Vector2f credit_Text_Origin_;
 
 	//Audio
-	sf::Music main_Music_;
-	sf::Sound ui_Confirmation_;
-	sf::Sound ui_Hover_;
-	sf::SoundBuffer ui_ConfirmationSB_;
-	sf::SoundBuffer ui_HoverSB_;
-
-
-	void loadSound(sf::Sound&, sf::SoundBuffer&, std::string);
-
+	Audio_Manager& a_instance_ = Audio_Manager::getInstance();
 
 };

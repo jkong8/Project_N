@@ -123,6 +123,7 @@
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Animation_Controller.cpp" />
+    <ClCompile Include="Audio_Manager.cpp" />
     <ClCompile Include="Battle_State.cpp" />
     <ClCompile Include="Cutscene_State.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -136,6 +137,7 @@
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Animation_Controller.h" />
+    <ClInclude Include="Audio_Manager.h" />
     <ClInclude Include="Battle_State.h" />
     <ClInclude Include="Cutscene_State.h" />
     <ClInclude Include="Entity.h" />

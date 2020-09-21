@@ -154,6 +154,9 @@ void ATwo::basic_attack(Entity& target)
 {
 	if (!isAttacking())
 	{
+		//Play Audio
+		a_instance.basic_damage_.play();
+		//Do damage calculations
 		target.setHp(target.getHp() - getAttack());
 		setAttacking(true);
 		animation_Controller_.start(0);
@@ -351,6 +354,9 @@ void TwoB::basic_attack(Entity& target)
 {
 	if (!isAttacking())
 	{
+		//Play Audio
+		a_instance.basic_damage_.play();
+		//Do damage calculations
 		target.setHp(target.getHp() - getAttack());
 		setAttacking(true);
 		animation_Controller_.start(0);
@@ -546,6 +552,9 @@ void NineS::basic_attack(Entity& target)
 {
 	if (!isAttacking())
 	{
+		//Play Audio
+		a_instance.basic_damage_.play();
+		//Do damage calculations
 		target.setHp(target.getHp() - getAttack());
 		setAttacking(true);
 		animation_Controller_.start(0);
