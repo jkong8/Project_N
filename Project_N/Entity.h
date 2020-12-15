@@ -100,7 +100,10 @@ public:
 
 private:
 	//Animate <!> Contains Test Animations
-	Animation test_Animation_;
+	//<!> Apply Flyweight for animations?
+	Animation test_Animation_; //<--Attacking Test Ani.
+	Animation head_bobbn_;
+	Animation battle_idle_;
 	bool hasSP_(float);
 	bool hasATP_();
 
@@ -143,6 +146,7 @@ public:
 private:
 	//Animate <!> Contains Test Animations
 	Animation test_Animation_;
+	Animation battle_idle_;
 	bool hasSP_(float);
 	bool hasATP_();
 
@@ -185,6 +189,7 @@ public:
 private:
 	//Animate <!> Contains Test Animations
 	Animation test_Animation_;
+	Animation battle_idle_;
 	bool hasSP_(float);
 	bool hasATP_();
 };

@@ -63,7 +63,7 @@ void Scene_One::update()
 
 	aTwo.say("They are here!", 2800, 200, timer);
 	//Finish Scene at the 20th second
-	finish(3000, timer);
+	finish(420, timer);
 	//<!> DELETE LATER AND IMPLEMENT BETTER
 	if (finished)
 	{

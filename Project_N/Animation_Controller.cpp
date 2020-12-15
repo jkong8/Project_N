@@ -9,7 +9,14 @@ Animation_Controller::Animation_Controller()
 //Animates the Current Animation
 void Animation_Controller::animate()
 {
+	//Animates the current animation
 	animations_[currentAnimation_].animate();
+
+	//If loop default is true and the current animation is finished, loop default animation
+	if ((loop_d_ == true) && animations_[currentAnimation_].isFinished)
+	{
+		loop(defaultAnimation);
+	}
 }
 
 //Adds Animation to Vector
@@ -61,4 +68,9 @@ bool Animation_Controller::isEmpty()
 	}
 
 	return false;
+}
+
+void Animation_Controller::loopDefault(bool loop)
+{
+	loop_d_ = loop;
 }

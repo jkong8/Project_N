@@ -4,7 +4,7 @@
 Entity::Entity() : x_(0), y_(0) 
 {
 	Entity::rectangle_.setPosition(sf::Vector2f(*x(), *y()));
-	Entity::rectangle_.setSize(sf::Vector2f(100.0f, 100.0f));
+	Entity::rectangle_.setSize(sf::Vector2f(55.0f, 150.0f));
 }
 
 
@@ -82,14 +82,26 @@ const std::string ATwo::s_ability_names[3] = { "A2 Ability One", "A2 Ability Two
 
 ATwo::ATwo() :
 	//Creating the animation in constructor list
-	test_Animation_(*ATwo::rectangle(), "./Textures/attack-sheet.png")
+	test_Animation_(*ATwo::rectangle(), "./Textures/attack-sheet.png"),
+	head_bobbn_(*ATwo::rectangle(), "./Textures/A2_Bobbn_Idle.png"),
+	battle_idle_(*ATwo::rectangle(), "./Textures/A2_Battle_Idle.png")
 {
-	animation_Controller_.addAnimation(test_Animation_);
-	animation_Controller_.getAnimation(0).setParameters(100, 74, 2, 7, 4);
+	//Adds the animations to the animation controller
+	animation_Controller_.addAnimation(battle_idle_);		//0 - DEFAULT
+	animation_Controller_.addAnimation(test_Animation_);	//1
+	animation_Controller_.addAnimation(head_bobbn_);		//2
+	
+	//Sets parameters for all animations
+	animation_Controller_.getAnimation(0).setParameters(55, 150, 1, 4, 30);
+	animation_Controller_.getAnimation(1).setParameters(100, 74, 2, 7, 4);
+	animation_Controller_.getAnimation(2).setParameters(55, 150, 1, 4, 30);
+	//Sets the stats 
 	setAttack(10);
 	setDefense(10);
 	setMaxHP(250);
 	setHp(getMaxHP());
+	//Loops first animation
+	animation_Controller_.loopDefault(true);
 }
 
 void ATwo::update()
@@ -159,7 +171,7 @@ void ATwo::basic_attack(Entity& target)
 		//Do damage calculations
 		target.setHp(target.getHp() - getAttack());
 		setAttacking(true);
-		animation_Controller_.start(0);
+		animation_Controller_.start(1);
 		setDelay(60);
 		std::cout << "BASIC ATTACK\n";
 	}
@@ -172,7 +184,7 @@ void ATwo::ability_one(Entity& target)
 		target.setHp(target.getHp() - (getAttack() + 20));
 		ATwo::s_sp -= 5;
 		setAttacking(true);
-		animation_Controller_.start(0);
+		animation_Controller_.start(1);
 		setDelay(100);
 		std::cout << "Ability One\n";
 	}
@@ -185,7 +197,7 @@ void ATwo::ability_two(Entity& target)
 		target.setHp(target.getHp() - (getAttack() + 50));
 		ATwo::s_sp -= 10;
 		setAttacking(true);
-		animation_Controller_.start(0);
+		animation_Controller_.start(1);
 		setDelay(180);
 		std::cout << "Ability Two\n";
 	}
@@ -198,7 +210,7 @@ void ATwo::ability_three(Entity& target)
 		target.setHp(target.getHp() - (getAttack() + 70));
 		ATwo::s_sp -= 15;
 		setAttacking(true);
-		animation_Controller_.start(0);
+		animation_Controller_.start(1);
 		setDelay(300);
 		std::cout << "Ability Three\n";
 	}
@@ -279,14 +291,23 @@ const std::string TwoB::s_name = "2B";
 
 TwoB::TwoB() :
 	//<!> TEST ANIMATIONS
-	test_Animation_(*TwoB::rectangle(), "./Textures/attack-sheet.png")
+	test_Animation_(*TwoB::rectangle(), "./Textures/attack-sheet.png"),
+	battle_idle_(*TwoB::rectangle(), "./Textures/2B_Battle_Idle.png")
 {
+	//Adding Animations to Controller
+	animation_Controller_.addAnimation(battle_idle_);
 	animation_Controller_.addAnimation(test_Animation_);
-	animation_Controller_.getAnimation(0).setParameters(100, 74, 2, 7, 4);
+	animation_Controller_.getAnimation(0).setParameters(55, 150, 1, 4, 30); //0
+	animation_Controller_.getAnimation(1).setParameters(100, 74, 2, 7, 4);	//1
+
+	//Setting Stats
 	setAttack(10);
 	setDefense(10);
 	setMaxHP(250);
 	setHp(getMaxHP());
+
+	//Loop Default (0) animation
+	animation_Controller_.loopDefault(true);
 }
 
 void TwoB::update()
@@ -359,7 +380,7 @@ void TwoB::basic_attack(Entity& target)
 		//Do damage calculations
 		target.setHp(target.getHp() - getAttack());
 		setAttacking(true);
-		animation_Controller_.start(0);
+		animation_Controller_.start(1);
 		setDelay(60);//delay actions by 60 frames
 		std::cout << "BASIC ATTACK\n";
 	}
@@ -373,7 +394,7 @@ void TwoB::ability_one(Entity& target)
 		target.setHp(target.getHp() - (getAttack() + 20));
 		TwoB::s_sp -= 5;
 		setAttacking(true);
-		animation_Controller_.start(0);
+		animation_Controller_.start(1);
 		setDelay(100);//delay actions by 60 frames
 		std::cout << "Ability One\n";
 	}
@@ -387,7 +408,7 @@ void TwoB::ability_two(Entity& target)
 		target.setHp(target.getHp() - (getAttack() + 50));
 		TwoB::s_sp -= 10;
 		setAttacking(true);
-		animation_Controller_.start(0);
+		animation_Controller_.start(1);
 		setDelay(180);//delay actions by 180 frames
 		std::cout << "Ability Two\n";
 	}
@@ -400,7 +421,7 @@ void TwoB::ability_three(Entity& target)
 		target.setHp(target.getHp() - (getAttack() + 70));
 		TwoB::s_sp -= 15;
 		setAttacking(true);
-		animation_Controller_.start(0);
+		animation_Controller_.start(1);
 		setDelay(300);//delay actions by 300 frames
 		std::cout << "Ability Three\n";
 	}
@@ -480,14 +501,20 @@ float NineS::s_sp = NineS::s_max_sp;
 const std::string NineS::s_ability_names[3] = { "9S Ability One", "9S Ability Two", "9S Ability Three" };
 const std::string NineS::s_name = "9S";
 NineS::NineS() :
+	battle_idle_(*NineS::rectangle(), "./Textures/9S_Battle_Idle.png"),
 	test_Animation_(*NineS::rectangle(), "./Textures/attack-sheet.png")
 {
+	animation_Controller_.addAnimation(battle_idle_);
 	animation_Controller_.addAnimation(test_Animation_);
-	animation_Controller_.getAnimation(0).setParameters(100, 74, 2, 7, 4);
+	animation_Controller_.getAnimation(0).setParameters(55, 150, 1, 4, 30); //0
+	animation_Controller_.getAnimation(1).setParameters(100, 74, 2, 7, 4);
 	setAttack(10);
 	setDefense(10);
 	setMaxHP(250);
 	setHp(getMaxHP());
+
+	//Loop Default (0) animation
+	animation_Controller_.loopDefault(true);
 }
 
 void NineS::update()
@@ -557,7 +584,7 @@ void NineS::basic_attack(Entity& target)
 		//Do damage calculations
 		target.setHp(target.getHp() - getAttack());
 		setAttacking(true);
-		animation_Controller_.start(0);
+		animation_Controller_.start(1);
 		setDelay(60);
 		std::cout << "BASIC ATTACK\n";
 	}

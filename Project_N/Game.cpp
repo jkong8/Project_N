@@ -3,7 +3,7 @@
 #define WIDTH 1280
 #define HEIGHT 720
 
-bool Game::party[3] = { true, true, false };
+bool Game::party[3] = { true, true, true };
 //Constructor
 Game::Game() :
 	menu_State(&current_State_, &cutscene_State),
@@ -59,7 +59,5 @@ bool Game::isOn()
 {
 	return Game::on_;
 }
-
-//WILL THIS BE PUSHED TO MY GIT HUB?
 
 

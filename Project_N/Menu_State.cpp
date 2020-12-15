@@ -1,7 +1,10 @@
 #include "Menu_State.h"
 #include <iostream>
 
-Menu_State::Menu_State(Game_State** current_State, Game_State* next_State)
+Menu_State::Menu_State(Game_State** current_State, Game_State* next_State) :
+	//<!> Delete Later
+	sword_animation_(sword_, "./Textures/Virtuous_Treaty.png"),
+	bobbn_a2_(a2_, "./Textures/A2_Bobbn_Idle.png")
 {
 	//Assign pointers for state transition
 	Menu_State::ptr_to_ptr_to_current_State_ = current_State;
@@ -69,9 +72,18 @@ Menu_State::Menu_State(Game_State** current_State, Game_State* next_State)
 		Menu_State::rain[i].shape.setFillColor(sf::Color::White);
 	}
 
-	//<!> Delete Later
-	std::cout << "Audio from Main:" << &a_instance_ << "\n";
+	//<!> Delete Later - Sword Animation
+	sword_.setSize(sf::Vector2f(45, 100));
+	sword_.setPosition(sf::Vector2f(1200, 500));
+	sword_animation_.setParameters(45, 175, 1, 11, 10);
+	sword_anicontroller_.addAnimation(sword_animation_);
+	sword_anicontroller_.loop(0);
 
+	a2_.setSize(sf::Vector2f(55, 150));
+	a2_.setPosition(sf::Vector2f(1145, 520));
+	bobbn_a2_.setParameters(55, 155, 1, 4, 30);
+	a2_anicontroller_.addAnimation(bobbn_a2_);
+	a2_anicontroller_.loop(0);
 }
 
 Game_State* Menu_State::enter()
@@ -136,6 +148,9 @@ void Menu_State::update(sf::RenderWindow& window, std::vector<Entity*>& eVector)
 		rain[i].shape.setPosition(rain[i].shape.getPosition() + rain[i].velocity);
 	}
 	
+	//<!> Delete Later - Animates the sword
+	sword_anicontroller_.animate();
+	a2_anicontroller_.animate();
 }
 
 void Menu_State::render(sf::RenderWindow& window, std::vector<Entity*>& eVector)
@@ -152,4 +167,7 @@ void Menu_State::render(sf::RenderWindow& window, std::vector<Entity*>& eVector)
 		window.draw(rain[i].shape);
 	}
 
+	//<!> Delete Later - Render Sword
+	window.draw(sword_);
+	window.draw(a2_);
 }

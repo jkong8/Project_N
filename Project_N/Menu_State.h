@@ -38,4 +38,11 @@ private:
 	//Audio
 	Audio_Manager& a_instance_ = Audio_Manager::getInstance();
 
+	//<!> Delete Later
+	Animation sword_animation_;
+	Animation bobbn_a2_;
+	sf::RectangleShape sword_;
+	sf::RectangleShape a2_;
+	Animation_Controller sword_anicontroller_;
+	Animation_Controller a2_anicontroller_;
 };

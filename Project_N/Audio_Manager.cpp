@@ -1,5 +1,5 @@
 #include "Audio_Manager.h"
-
+//Singleton
 Audio_Manager& Audio_Manager::getInstance()
 {
 	static Audio_Manager *instance = new Audio_Manager();

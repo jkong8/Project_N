@@ -85,6 +85,7 @@ void Animation::start()
 	//Apply sprite
 	Animation::shape_->setTexture(&sprite_Sheet_);
 	Animation::play_ = true;
+	Animation::isFinished = false;
 }
 
 //Stops the Animation, Stops Loop, Resets Timer
@@ -92,6 +93,7 @@ void Animation::stop()
 {
 	Animation::play_ = false;
 	Animation::loop_ = false;
+	Animation::isFinished = true;
 	Animation::timer_ = 0;
 	Animation::currentRow_ = 0;
 	Animation::currentColumn_ = 0;
@@ -101,5 +103,9 @@ void Animation::stop()
 void Animation::loop()
 {
 	Animation::loop_ = true;
-	Animation::start();
+	//Starts the animation if it isn't already playing
+	if (Animation::play_ == false)
+	{
+		Animation::start();
+	}
 }

@@ -12,6 +12,7 @@ public:
 	void start();
 	void stop();
 	void loop();
+	bool isFinished = true;
 private:
 	sf::RectangleShape* shape_;
 	sf::Texture sprite_Sheet_;
